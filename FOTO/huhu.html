@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Card</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        transition: all 0.2s ease-in-out;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Open Sans", sans-serif;
+        background: linear-gradient(to right, #45b649, #dce35b);
+        overflow: hidden;
+      }
+
+      .slider-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: 100vh;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+      }
+
+      .slider-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        background: #12192c;
+        border-radius: 30px;
+        height: 85vh;
+        width: 80vw;
+        margin: auto;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em;
+        color: #dce35b;
+        position: relative;
+      }
+
+      img.birthday {
+        max-height: 40vh;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+
+      .text {
+        padding: 2em;
+      }
+
+      .text h1 {
+        font-family: cursive;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .credit a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .credit {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      /* Indikator titik */
+      .indicator {
+        position: fixed;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 100;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        background: #ffffff99;
+        border-radius: 50%;
+        transition: background 0.3s ease;
+      }
+
+      .dot.active {
+        background: #ffffff;
+        transform: scale(1.2);
+      }
+
+      @media (min-width: 1000px) {
+        .card {
+          flex-direction: row-reverse;
+        }
+        .card img.birthday {
+          width: 60%;
+          max-width: 50vw;
+          max-height: unset;
+          border-radius: 30px;
+        }
+      }
+
+      /* Sembunyikan iframe */
+      iframe {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Musik autoplay dari YouTube (sembunyi iframe) -->
+    <iframe
+      src="https://www.youtube.com/embed/1HxVjrbydk0?autoplay=1&mute=1&loop=1&playlist=1HxVjrbydk0"
+      allow="autoplay"
+      frameborder="0"
+      allowfullscreen
+      style="display: none"
+    ></iframe>
+
+    <!-- Slider container -->
+    <div class="slider-container" id="slider">
+      <!-- Slide 1 -->
+      <div class="card">
+        <img
+          src="https://raw.githubusercontent.com/daviard785/birthday-card/main/FOTO/beruanghappy.jpg"
+          alt="birthday"
+          class="birthday"
+        />
+        <div class="text">
+          <h1>Happy Birthday Sayangku!</h1>
+          <p>
+            <span style="color: tomato">❤</span
+            ><span style="color: tomato">❤</span
+            ><span style="color: tomato">❤</span>
+          </p>
+          <div class="credit">by D</div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="card">
+        <img
+          src="https://cdn.pixabay.com/photo/2022/01/18/18/12/heart-6947270_960_720.png"
+          alt="heart"
+          class="birthday"
+        />
+        <div class="text">
+          <h1>Aku Sayang Kamu 💌</h1>
+          <p>
+            Setiap hari bersamamu adalah hadiah. Terima kasih telah menjadi
+            cahaya dalam hidupku.
+          </p>
+          <div class="credit">Selalu untukmu 💕</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titik indikator -->
+    <div class="indicator">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </div>
+
+    <!-- Script indikator aktif -->
+    <script>
+      const slider = document.getElementById("slider");
+      const dots = document.querySelectorAll(".dot");
+
+      slider.addEventListener("scroll", () => {
+        const index = Math.round(slider.scrollLeft / window.innerWidth);
+        dots.forEach((dot) => dot.classList.remove("active"));
+        if (dots[index]) dots[index].classList.add("active");
+      });
+    </script>
+  </body>
+</html>
